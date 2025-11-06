@@ -1,0 +1,15 @@
+parameters:
+  base-dir:
+    default: "{cwd}"
+  target:
+    default: "output/spec"
+emit:
+  - "@typespec/json-schema"
+options:
+  "@typespec/json-schema":
+    emitter-output-dir: "{output-dir}/schema"
+    #bundleId: "ddsReference.schema.json"
+    emitAllModels: true      # no @jsonSchema needed
+    file-type: "json"
+    emitAllRefs: true 
+
