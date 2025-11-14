@@ -128,4 +128,3 @@ model ProductionPlace {
     @doc("The are unit in either Meters Squared, Hectares or Acres")
     areaUnit?: AreaUnit; 
 }
-

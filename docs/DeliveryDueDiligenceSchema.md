@@ -1,4 +1,4 @@
-# Due Diligence Delivery Schema (v 1.0.1)
+# Due Diligence Delivery Schema DRAFT (v 1.0.1a)
 
 ## 1. Overview
 

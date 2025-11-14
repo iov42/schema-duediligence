@@ -27,10 +27,7 @@ You can now compile the TypeSpec Schema:
 npm run compile
 ```
 
-
-
-
-
+This will output 
 
 ## Schemas
 
