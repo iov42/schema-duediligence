@@ -4,30 +4,20 @@
   "type": "module",
   "peerDependencies": {
     "@typespec/compiler": "latest",
-    "@typespec/http": "latest",
-    "@typespec/openapi": "latest",
-    "@typespec/openapi3": "latest",
-    "@typespec/rest": "latest"
+    "@typespec/http": "latest"
   },
   "devDependencies": {
-    "@adobe/jsonschema2md": "^8.0.7",
     "@typespec/compiler": "latest",
     "@typespec/http": "latest",
-    "@typespec/openapi": "latest",
-    "@typespec/openapi3": "latest",
-    "@typespec/rest": "latest"
+    "shx": "^0.4.0"
   },
   "private": true,
   "packageManager": "npm@11.6.1+sha512.ee20d21c3a2ea7ab8c409dfbc96ae17ea71b3211745047c645aa7a36ff9a29072b2095e50a2d9c29b8fbe5606688795cc2c402cbf534cc4c0365d031e87fd56b",
   "dependencies": {
-    "@typespec/json-schema": "^1.4.0",
-    "json-schema-to-markdown": "^1.1.1",
-    "md-to-pdf": "^5.2.4"
+    "@typespec/json-schema": "^1.4.0"
   },
   "scripts": {
     "compile": "tsp compile \"./main.tsp\"",
-    "build": "node \"./scripts/generateMarkdown.js\"",
-    "prepare": "npx jsonschema2md -o docs/reference -d tsp-output/schema -n",
-    "output": "npx md-to-pdf docs/reference/ddsReference.md"
+    "dist": "shx cp -R output/* schema"
   }
 }

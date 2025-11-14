@@ -8,6 +8,8 @@ dist/
 # Dependency directories
 node_modules/
 
-#docs
-docs/
-out/
+# Output
+output/
+
+# Output PDFs
+*.pdf

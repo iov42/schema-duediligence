@@ -1,0 +1,53 @@
+{
+  "supplier": {
+    "name": "Example Supplier Ltd",
+    "country": "UK",
+    "identifiers": [
+      {
+        "id": "GB12345678",
+        "type": "VAT"
+      }
+    ]
+  },
+  "supplierRef": "JKLEFNKLADEWKJ1234123",
+  "customerRef": "0938490234",
+  "deliveryDate": "2024-08-16T12:40:20.37484Z",
+  "deliveryItems": [
+    {
+     	"id": "LINE-001",
+    	"hsCode": "440301",
+        "description": "Rough wood",
+        "quantity": [
+                {
+                    "value": 113.5,
+                    "unit": "kg"
+                }
+            ],
+     	"references": [
+            {
+            "ddrn": "1FALK24J34FEI21W",
+            "ddvn": "F3KI43KC"
+            }
+        ],
+        "producers": [
+            {
+                "id": "",
+                "name": "Rough Wood Producers",
+                "country": "BR",
+                "productionPlaceRefs": [
+                    "PP-100"
+                ]
+            }
+        ]
+    }
+  ],
+  "productionPlaces": [
+    {
+      "id": "PP-100",
+      "name": "Fazenda Vista Alegre",
+      "geoData": "<GeoJSON Encoded Data>",
+      "area": 140,
+      "areaUnit": "ha"
+    }
+  ]
+}

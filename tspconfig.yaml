@@ -7,8 +7,8 @@ emit:
   - "@typespec/json-schema"
 options:
   "@typespec/json-schema":
-    emitter-output-dir: "{output-dir}/schema"
-    #bundleId: "ddsReference.schema.json"
+    emitter-output-dir: "{base-dir}/output"
+    bundleId: "deliveryddinfo.schema.json"
     emitAllModels: true      # no @jsonSchema needed
     file-type: "json"
     emitAllRefs: true 

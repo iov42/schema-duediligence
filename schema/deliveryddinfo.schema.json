@@ -1,0 +1,302 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "deliveryddinfo.schema.json",
+    "$defs": {
+        "DeliveryDueDiligenceInfo": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "DeliveryDueDiligenceInfo.json",
+            "type": "object",
+            "properties": {
+                "supplier": {
+                    "$ref": "OrgDetails.json",
+                    "description": "The supplier details."
+                },
+                "supplierRef": {
+                    "type": "string",
+                    "description": "Supplier reference for the delivery."
+                },
+                "customerRef": {
+                    "type": "string",
+                    "description": "Customer reference for the delivery."
+                },
+                "deliveryDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Actual or expected delivery date."
+                },
+                "deliveryItems": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "DueDiligenceLineItem.json"
+                    },
+                    "description": "Provides Due Diligence information for each line item."
+                },
+                "productionPlaces": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "ProductionPlace.json"
+                    },
+                    "description": "List of production places that are references within the line items."
+                }
+            },
+            "required": [
+                "supplier",
+                "supplierRef",
+                "customerRef"
+            ],
+            "description": "Provides due diligence information relevant to EUDR Due Diligence declarations."
+        },
+        "OrgDetails": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "OrgDetails.json",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the sending company - ideally the legal entity name."
+                },
+                "country": {
+                    "$ref": "CountryCode.json",
+                    "description": "The ISO 3166-1 alpha-2 country code that is the jurisdiction of the sending company."
+                },
+                "identifiers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "OrgId.json"
+                    },
+                    "description": "List of different ways to identify the company using official identifiers."
+                }
+            },
+            "required": [
+                "name",
+                "country",
+                "identifiers"
+            ]
+        },
+        "CountryCode": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "CountryCode.json",
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "A country code in ISO 3166-1 alpha-2 format (e.g., \"US\", \"FR\")."
+        },
+        "OrgId": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "OrgId.json",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The official identifier"
+                },
+                "type": {
+                    "$ref": "OrgIdType.json",
+                    "description": "The type of the identifier (e.g. VAT, Company Reg Number etc)"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "If the OrgIdType is Other then this should indicate what the Id represents, if the OrgIdType is iso6532 then it should indicate which id schema it falls under."
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ]
+        },
+        "OrgIdType": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "OrgIdType.json",
+            "type": "string",
+            "enum": [
+                "VAT",
+                "Registration",
+                "ISNI",
+                "BIC",
+                "LEI",
+                "iso6523",
+                "Other"
+            ]
+        },
+        "DueDiligenceLineItem": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "DueDiligenceLineItem.json",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The sender unique reference for a line item."
+                },
+                "batchNo": {
+                    "type": "string",
+                    "description": "If there is a batch number that links a particular product item together than include that identity here."
+                },
+                "hsCode": {
+                    "type": "string",
+                    "description": "The HS (Harmonised System) Code of the line item Product."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the line item Product."
+                },
+                "quantity": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Quantity.json"
+                    },
+                    "description": "Quantity(ies) of the line item with provision to provide extra units aside from base units."
+                },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "DDSReference.json"
+                    },
+                    "description": "Information about the relevant DDS References."
+                },
+                "producers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Producer.json"
+                    },
+                    "description": "List of Producer information."
+                }
+            },
+            "required": [
+                "id",
+                "batchNo",
+                "hsCode",
+                "description",
+                "quantity",
+                "references",
+                "producers"
+            ]
+        },
+        "Quantity": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "Quantity.json",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "The actual quantity for the line item."
+                },
+                "unit": {
+                    "$ref": "QuantityType.json",
+                    "description": "The unit that the quantity represents"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "If the unit is other then included a definition here."
+                }
+            },
+            "required": [
+                "value",
+                "unit"
+            ]
+        },
+        "QuantityType": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "QuantityType.json",
+            "type": "string",
+            "enum": [
+                "kg",
+                "m",
+                "m2",
+                "m3",
+                "other"
+            ]
+        },
+        "DDSReference": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "DDSReference.json",
+            "type": "object",
+            "properties": {
+                "ddrn": {
+                    "type": "string",
+                    "description": "The DD Statement Reference Number"
+                },
+                "ddvn": {
+                    "type": "string",
+                    "description": "The DD Statement Verification Number"
+                }
+            },
+            "required": [
+                "ddrn",
+                "ddvn"
+            ]
+        },
+        "Producer": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "Producer.json",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The supplier unique identifier for Producer."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the producer."
+                },
+                "country": {
+                    "$ref": "CountryCode.json",
+                    "description": "The country of the producer. ISO 3166-1 alpha-2 format."
+                },
+                "productionPlaceRefs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of production place ids that are relevant to this producer."
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "country",
+                "productionPlaceRefs"
+            ]
+        },
+        "ProductionPlace": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "ProductionPlace.json",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The supplier’s unique identifier for this production place."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the production place."
+                },
+                "geoData": {
+                    "type": "string",
+                    "contentEncoding": "base64",
+                    "description": "Base64 encoded string that contains the GeoJson. The expectation is that content follows the GeoJSON Schema. This means the contents can be parsed or downloaded without worrying about parsing."
+                },
+                "area": {
+                    "type": "string",
+                    "description": "The area that this production place covers."
+                },
+                "areaUnit": {
+                    "$ref": "AreaUnit.json",
+                    "description": "The are unit in either Meters Squared, Hectares or Acres"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "AreaUnit": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "AreaUnit.json",
+            "type": "string",
+            "enum": [
+                "m2",
+                "ha",
+                "acre"
+            ]
+        }
+    }
+}
