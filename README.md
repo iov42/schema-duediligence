@@ -27,7 +27,11 @@ You can now compile the TypeSpec Schema:
 npm run compile
 ```
 
-This will output 
+This will output the schemas to the directory _/output_.
+
+### Including the schema into the repo
+
+
 
 ## Schemas
 
